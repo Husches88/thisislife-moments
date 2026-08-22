@@ -27,8 +27,14 @@ async function githubRequest(path, env, options = {}) {
   const text = await res.text();
   let data;
   try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
   if (!res.ok) {
-    throw new Error(data.message || `GitHub API Fehler ${res.status}`);
+    const err = new Error(data.message || `GitHub API Fehler ${res.status}`);
+    err.githubStatus = res.status;
+    err.githubMessage = data.message || "";
+    err.githubDocumentation = data.documentation_url || "";
+    err.acceptedPermissions = res.headers.get("X-Accepted-GitHub-Permissions") || "";
+    throw err;
   }
   return data;
 }
