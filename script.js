@@ -29,7 +29,7 @@ async function load() {
   items = d.images || [];
 
   const h = items.find(x => x.hero);
-  if (h) hero.style.backgroundImage = `url("${imageUrl(h.file)}")`;
+  if (h && hero) hero.style.backgroundImage = `url("${imageUrl(h.file)}")`;
 
   const g = items.filter(x => !x.hero);
   statusEl.textContent = `${g.length} Moments`;

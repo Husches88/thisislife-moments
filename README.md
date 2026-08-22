@@ -40,4 +40,4 @@ Melde dich mit `ADMIN_PASSWORD` an.
 Bilder werden nach `images/` geschrieben und die Metadaten in `images.json` aktualisiert.
 Die öffentliche Galerie liest `/api/images`.
 
-Wichtig: Die `functions/` müssen im Repository vorhanden sein. Cloudflare Pages muss über die Git-Integration deployen; Direct Upload unterstützt Pages Functions nicht.
+Wichtig: Der Upload verwendet JSON statt multipart/form-data, damit Safari/Cloudflare keine Boundary-Fehler erzeugen. Die `functions/` müssen im Repository vorhanden sein. Cloudflare Pages muss über die Git-Integration deployen; Direct Upload unterstützt Pages Functions nicht.
