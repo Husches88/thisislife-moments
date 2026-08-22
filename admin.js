@@ -170,3 +170,10 @@ $("logout").onclick = () => {
 };
 
 load().catch(() => {});
+
+$("githubTest").onclick = async () => {
+  $("githubTestResult").textContent = "Teste GitHub …";
+  const r = await fetch("/api/github-test",{cache:"no-store"});
+  const d = await r.json();
+  $("githubTestResult").textContent = JSON.stringify(d,null,2);
+};
