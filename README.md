@@ -1,31 +1,43 @@
-# THIS IS LIFE — statische GitHub + Cloudflare Pages Version
+# THIS IS LIFE — GitHub Upload Admin
 
-Diese Version verwendet **kein Cloudflare R2**, keine Pages Functions und keine `images.json`.
+Diese Version nutzt:
+- GitHub als Bildspeicher
+- Cloudflare Pages
+- Pages Functions
+- GitHub Fine-grained Token als Cloudflare Secret
+- kein R2
 
-Die Galerie ist direkt in `index.html` eingetragen. Die Bilder werden direkt aus `images/` geladen.
+## Cloudflare Variablen / Secrets (Production)
 
-## Struktur
+Secret:
+- `GITHUB_TOKEN`
+- `ADMIN_PASSWORD`
 
-```text
-index.html
-style.css
-script.js
-images/
-  hero.jpg
-  ORIGINAL_IG-....jpg
-  ...
-```
+Variablen:
+- `GITHUB_OWNER` = dein GitHub Benutzername
+- `GITHUB_REPO` = `thisislife-moments`
+- `GITHUB_BRANCH` = `main`
 
-## Deployment
+## GitHub Token
 
-Cloudflare Pages:
+Fine-grained token:
+- Repository access: nur `thisislife-moments`
+- Contents: Read and write
+
+## Pages
+
 - Framework: None
 - Build command: leer
 - Build output directory: `/`
 - Production branch: `main`
 
-Nach einem Commit auf `main` wird die Seite über die GitHub-Integration neu deployed.
+## Nutzung
 
-## Neue Bilder
+Öffne:
+`https://thisislife.pages.dev/admin.html`
 
-Neue Bilder müssen in `index.html` ergänzt werden, weil diese Version bewusst komplett statisch ist.
+Melde dich mit `ADMIN_PASSWORD` an.
+Bilder werden nach `images/` geschrieben und die Metadaten in `images.json` aktualisiert.
+Die öffentliche Galerie liest `/api/images`.
+
+Wichtig: Die `functions/` müssen im Repository vorhanden sein. Cloudflare Pages muss über die Git-Integration deployen; Direct Upload unterstützt Pages Functions nicht.

@@ -3,21 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>THIS IS LIFE — Bilder</title>
-<style>
-body{font-family:Arial,sans-serif;max-width:850px;margin:50px auto;padding:20px;background:#111;color:#eee;line-height:1.6}
-.card{background:#1b1b1b;border:1px solid #333;border-radius:16px;padding:25px}
-code{background:#282828;padding:3px 6px;border-radius:5px}
-a{color:#fff}
-</style>
+<title>THIS IS LIFE — Admin</title>
+<link rel="stylesheet" href="admin.css">
 </head>
 <body>
-<div class="card">
-<h1>THIS IS LIFE — Bilder</h1>
-<p>Diese Version verwendet kein Cloudflare R2 und keine API.</p>
-<p>Die Bilder liegen direkt im GitHub-Ordner <code>images/</code>.</p>
-<p>Wenn du neue Bilder hinzufügst, musst du sie zusätzlich als neuen <code>&lt;article&gt;</code>-Eintrag in <code>index.html</code> aufnehmen.</p>
-<p><a href="index.html">← Zur Website</a></p>
+<div id="login" class="panel login">
+  <div class="brand">THIS IS LIFE<span>®</span></div>
+  <h1>Admin</h1>
+  <p>Fotos verwalten</p>
+  <form id="loginForm">
+    <input id="password" type="password" placeholder="Admin-Passwort" required>
+    <button>Anmelden</button>
+    <div id="loginError"></div>
+  </form>
 </div>
+
+<div id="app" hidden>
+<header>
+  <div><div class="brand">THIS IS LIFE<span>®</span></div><h1>Admin</h1></div>
+  <button id="logout" class="ghost">Abmelden</button>
+</header>
+
+<section class="panel">
+  <h2>Fotos hochladen</h2>
+  <input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple>
+  <div class="row">
+    <input id="title" placeholder="Titel (optional)">
+    <input id="category" placeholder="Kategorie" value="MOMENT">
+    <label><input id="hero" type="checkbox"> Als Titelbild</label>
+  </div>
+  <button id="upload">Bilder hochladen</button>
+  <p class="hint">Jede Datei max. 20 MB. Die Bilder werden direkt in dein GitHub-Repository hochgeladen.</p>
+  <div id="uploadMsg"></div>
+</section>
+
+<section class="panel">
+  <div class="listHead"><h2>Galerie</h2><button id="refresh" class="ghost">Aktualisieren</button></div>
+  <div id="items"></div>
+</section>
+</div>
+<script src="admin.js"></script>
 </body>
 </html>
