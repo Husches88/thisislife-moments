@@ -93,7 +93,12 @@ export async function onRequestPost({ request, env }) {
     return Response.json({ ok: true, file: fileName });
   } catch (e) {
     return Response.json(
-      { error: e.message || "Upload fehlgeschlagen" },
+      {
+        error: e.githubMessage || e.message || "Upload fehlgeschlagen",
+        github_status: e.githubStatus || null,
+        accepted_permissions: e.acceptedPermissions || "",
+        documentation: e.githubDocumentation || ""
+      },
       { status: 500 }
     );
   }
