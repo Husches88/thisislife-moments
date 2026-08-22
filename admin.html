@@ -1,6 +1,27 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>THIS IS LIFE — Admin</title><link rel="stylesheet" href="admin.css"></head><body>
-<div id="login" class="panel"><div class="brand">THIS IS LIFE<span>®</span></div><h1>Admin</h1><p>Geschützter Bereich</p><form id="loginForm"><input id="password" type="password" placeholder="Passwort" autocomplete="current-password" required><button>Anmelden</button><div id="loginError"></div></form></div>
-<div id="app" hidden><header><div><div class="brand">THIS IS LIFE<span>®</span></div><h1>Admin</h1></div><button id="logout" class="ghost">Abmelden</button></header>
-<section class="panel"><h2>Bilder hochladen</h2><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple><div class="row"><input id="title" placeholder="Titel (optional)"><input id="category" placeholder="Kategorie" value="MOMENT"><label><input id="hero" type="checkbox"> Als Titelbild</label></div><button id="upload">Bilder hochladen</button><p class="hint">Jede Datei max. 25 MB. JPG, PNG, WEBP, GIF oder AVIF.</p><div id="uploadMsg"></div></section>
-<section class="panel"><div class="listHead"><h2>Galerie</h2><button id="refresh" class="ghost">Aktualisieren</button></div><div id="items"></div></section></div>
-<script src="admin.js"></script></body></html>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THIS IS LIFE — Bilder verwalten</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:850px;margin:50px auto;padding:20px;background:#111;color:#eee;line-height:1.6}
+.card{background:#1b1b1b;border:1px solid #333;border-radius:16px;padding:25px}
+code{background:#282828;padding:3px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>THIS IS LIFE — Bilder</h1>
+<p>Diese einfache Version verwendet kein Cloudflare R2.</p>
+<h2>Neues Bild hinzufügen</h2>
+<ol>
+<li>Bild in den GitHub-Ordner <code>images/</code> hochladen.</li>
+<li>In <code>images.json</code> einen Eintrag mit dem exakten Dateinamen ergänzen.</li>
+<li>Commit speichern.</li>
+<li>Cloudflare Pages veröffentlicht die Änderung automatisch.</li>
+</ol>
+<p><a href="index.html" style="color:#fff">← Zur Website</a></p>
+</div>
+</body>
+</html>

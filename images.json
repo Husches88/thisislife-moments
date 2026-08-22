@@ -1,0 +1,22 @@
+[
+  {
+    "file": "bild01.jpg",
+    "title": "Ein besonderer Moment",
+    "category": "MOMENT"
+  },
+  {
+    "file": "bild02.jpg",
+    "title": "Erinnerungen",
+    "category": "MOMENT"
+  },
+  {
+    "file": "bild03.jpg",
+    "title": "Gemeinsam",
+    "category": "FAMILIE"
+  },
+  {
+    "file": "bild04.jpg",
+    "title": "Für immer",
+    "category": "LIFE"
+  }
+]
