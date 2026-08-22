@@ -1,35 +1,50 @@
 # THIS IS LIFE — Moments
 
-## Einfache Variante ohne Cloudflare R2
+## GitHub + Cloudflare Pages — ohne R2
 
-Die Website läuft über GitHub + Cloudflare Pages.
-Die Fotos liegen direkt im GitHub-Ordner `images/`.
+Die Website lädt die Fotos direkt aus dem GitHub-Ordner `images/`. Es ist **kein Cloudflare R2** notwendig.
 
-### Struktur
+### Ordnerstruktur
 
 ```text
 index.html
 style.css
 script.js
 images.json
+admin.html
 images/
-  bild01.jpg
-  bild02.jpg
-  bild03.jpg
+  hero.jpg
+  ORIGINAL_IG-178....jpg
   ...
 ```
 
+### Deine aktuellen Bilder
+
+Die mitgelieferte `images.json` ist bereits mit den Dateinamen aus deinem aktuellen `images`-Ordner vorbereitet.
+
+**Wichtig:** Die Dateinamen müssen in GitHub exakt gleich geschrieben sein.
+
 ### Neues Foto hinzufügen
 
-1. Foto in `images/` hochladen.
-2. Den Dateinamen in `images.json` ergänzen.
-3. Commit nach GitHub.
-4. Cloudflare Pages deployt die Änderung automatisch.
+1. Foto in GitHub nach `images/` hochladen.
+2. `images.json` öffnen.
+3. Einen neuen Eintrag ergänzen, z. B.:
 
-### Wichtig
+```json
+{
+  "file": "mein-neues-bild.jpg",
+  "title": "Mein neuer Moment",
+  "category": "MOMENT"
+}
+```
 
-- Dateiname in `images.json` muss exakt zum Bild passen.
-- Groß-/Kleinschreibung beachten.
-- Keine R2-Bindung nötig.
-- Die vorhandenen `functions/` sind für diese Variante nicht erforderlich.
-- Der alte R2-Adminbereich wird in dieser einfachen Variante nicht verwendet.
+4. Commit speichern.
+5. Cloudflare Pages deployt die Änderung automatisch.
+
+### Titelbild
+
+Ein Eintrag mit `"hero": true` wird als großes Titelbild verwendet. Aktuell ist `hero.jpg` das Titelbild.
+
+### Hinweis
+
+Der bisherige R2-Adminbereich wird in dieser Version nicht verwendet. Der vorhandene `functions`-Ordner ist für die neue einfache Variante ebenfalls nicht erforderlich.
