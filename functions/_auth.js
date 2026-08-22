@@ -1,8 +1,22 @@
-export async function requireAdmin(request, env){
-  const c=request.headers.get("Cookie")||"",m=c.match(/(?:^|;\s*)tl_session=([^;]+)/);if(!m)return false;
-  const parts=m[1].split(".");if(parts.length!==2)return false;const exp=Number(parts[1]);if(!exp||exp<Math.floor(Date.now()/1000))return false;
-  return (await sign(`${exp}.thisislife`,env.ADMIN_PASSWORD))===parts[0];
+
+const COOKIE = "tl_admin";
+const encoder = new TextEncoder();
+
+async function digest(value) {
+  const data = await crypto.subtle.digest("SHA-256", encoder.encode(value));
+  return [...new Uint8Array(data)].map(b => b.toString(16).padStart(2,"0")).join("");
 }
-async function sign(value,secret){const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);const sig=await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(value));return btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
-export function unauthorized(){return Response.json({ok:false,error:"Nicht angemeldet"},{status:401})}
-export function safeName(name){return name.replace(/[^a-zA-Z0-9._-]/g,"-").slice(-120)}
+
+async function makeSession(env) {
+  return digest(env.ADMIN_PASSWORD + "::THIS-IS-LIFE");
+}
+
+async function isAuthorized(request, env) {
+  if (!env.ADMIN_PASSWORD) return false;
+  const cookie = request.headers.get("Cookie") || "";
+  const match = cookie.match(new RegExp(COOKIE + "=([^;]+)"));
+  if (!match) return false;
+  return (await digest(env.ADMIN_PASSWORD + "::THIS-IS-LIFE")) === match[1];
+}
+
+export { makeSession, isAuthorized };
